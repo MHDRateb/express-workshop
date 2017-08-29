@@ -9,33 +9,22 @@ app.use(formidable());
 app.post("/create-post", function (req, res) {
   const filePath = __dirname + '/data/posts.json';
   // console.log(req.fields.blogpost);
-  const postContent = fs.readFile(filePath);
+  const postContent = fs.readFileSync(filePath);
   //  console.log(postContent);
   const posts = JSON.parse(postContent);
  // console.log(posts);
     posts[Date.now()]=req.fields.blogpost;
   //  //console.log(posts);
   fs.writeFileSync(filePath,JSON.stringify(posts));
-  //  res.send(200);
+   res.send(200,posts);
 
-
-//   const filePath = __dirname + '/data/posts.json';
-//   // console.log(req.fields.blogpost);
-//   const postContent = fs.readFile(filePath,function(error,filePath){
-
-//   });
-//   //  console.log(postContent);
-//   const posts = JSON.parse(postContent);
-//  // console.log(posts);
-//     posts[Date.now()]=req.fields.blogpost;
-//   //  //console.log(posts);
-//   fs.writeFile(filePath,JSON.stringify(posts),function(error){
-    
-//   });
-  //  res.send(200);
-
-  
 });
+
+app.get("/get-posts", function (req, res) {
+res.sendFile(__dirname + '/data/posts.json');
+
+});
+
 
 // app.post("/create-post", function (req, res) {
 //     console.log('I am /create-post endpoint');
@@ -51,6 +40,6 @@ app.post("/create-post", function (req, res) {
 // });
 
 
-app.listen(3000, function () {
+app.listen(process.env.PORT || 3000, function () {
   console.log('Server is listening on port 3000. Ready to accept requests!');
 });
