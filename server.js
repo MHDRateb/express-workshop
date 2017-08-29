@@ -20,10 +20,10 @@ app.post("/create-post", function (req, res) {
 
 });
 
-app.get("/get-posts", function (req, res) {
-res.sendFile(__dirname + '/data/posts.json');
+// app.get("/get-posts", function (req, res) {
+// res.sendFile(__dirname + '/data/posts.json');
 
-});
+// });
 
 
 // app.post("/create-post", function (req, res) {
